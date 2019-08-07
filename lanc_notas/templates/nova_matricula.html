@@ -1,0 +1,61 @@
+{% extends "layout/base.html" %}
+{% block title %}Matricular nova diciplina{% endblock %}
+{% block conteudo %}
+{% load static %}
+{% load mytage %}
+  <div class="wrapper">
+    <div class="d-flex" id="wrapper">
+     {% include "sidebar.html" %}
+     <div class="container-fluid">
+      {% include 'navbar.html' %}
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                  {% if message.tags %}<div class="alert alert-{% if message.tags == 'error' %}danger{%else%}{{message.tags}}{%endif%} alert-dismissible fade show mt-3" role="alert">{{message}}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>{% endif %}
+                {% endfor %}
+              {% endif %}
+            
+            <h5 class="card-title mt-3">Diciplinas disponíveis</h5>
+            <div class="card mt-3">                  
+                <table class="table">
+                  <form method="POST">
+                      {% csrf_token %}
+                      
+                    <thead>
+                        <tr>                      
+                          <th scope="col">Nome</th>
+                          <th scope="col">Nota de aprovação</th>
+                          <th scope="col">Semestre</th>                 
+                          <th scope="col">Matricular-se</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for d in diciplina %}
+                        
+                        <tr>
+                            <th scope="row"> {{d.nome_diciplina}}</th>
+                            <td>{{d.nota_aprovacao}}</td>
+                            <td>{% if d.semestre_aberto %}<span class="text-success">Aberto</span>{% else %}<span class="text-danger">Fechado</span>{% endif %}</td>                        
+                            <td class="acoes">
+                                <!-- <input class="btn btn-warning btn-sm" type="submit" name="botao" value="Matricular" {% if not d.semestre_aberto %}disabled{% endif %}/> -->
+                                <button type="submit" class="btn btn-warning btn-sm" name="diciplina" value="{{d.cod_diciplina}}"{% if not d.semestre_aberto and not user.professor%}disabled{% endif %}>Matricular</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    
+                  </form>
+                </table>            
+            </div>
+                    {% if not diciplina %}
+                      <h2 class="mt-3 text-center text-muted"> Não existe nenhuma diciplina disponível</h2>
+                    {% endif %}
+        <!-- </div>       -->
+              
+          </div>
+        </div>    
+     </div>
+  </div>
+ </div>
+
+{% endblock %}

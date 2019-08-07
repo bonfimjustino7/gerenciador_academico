@@ -1,0 +1,51 @@
+{% load widget_tweaks %}
+{% if messages %}
+            {% for message in messages %}
+              {% if message.tags %}<div class="alert alert-{% if message.tags == 'error' %}danger{%else%}{{message.tags}}{%endif%} alert-dismissible fade show mt-3" role="alert">{{message}}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>{% endif %}
+            {% endfor %}
+  {% endif %}
+<div class="conteudo mt-4 ml-4 mr-4">
+<form action="" method="POST">
+  {% csrf_token %}
+  <div class="card col-md-9">
+    <div class="card-header">
+      <h4 class="card-title">Pontuar Aluno</h4>
+      <p>Defina qual a aluno e quais notas ele recebeu no curso, para que se encaixe em alguma categoria.</p>
+    </div>
+  <div class="card-body p-4">
+    <div class="form-group row">
+      <label for="aluno" class="col-sm-2 col-form-label ">Aluno</label>
+      <div class="col-sm-10 semestre mb-2">
+        <select class="form-control" id="aluno" name="aluno" required="">
+          <option value="">---</option>
+          {% for al in alunos %}
+            <option value="{{al.matricula}}">{{al}}</option>
+          {%endfor%}
+        </select>
+      </div>
+      <label for="n1" class="col-sm-2 col-form-label">Nota 1</label>
+      <div class="col-sm-10 notas">
+        <input type="text" name="n1" id="n1" class="form-control">
+      </div>
+      <label for="n2" class="col-sm-2 col-form-label">Nota 2</label>
+      <div class="col-sm-10 notas">
+        <input type="text" name="n2" id="n2" class="form-control">
+      </div>
+      <label for="n3" class="col-sm-2 col-form-label">Nota 3</label>
+      <div class="col-sm-10 notas">
+        <input type="text" name="n3" id="n3" class="form-control">
+      </div>
+      <label for="faltas" class="col-sm-2 col-form-label">Faltas</label>
+      <div class="col-sm-10 notas">
+        <input type="text" name="faltas" id="faltas" class="form-control">
+      </div>
+      <div class="col-sm-10">
+        <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+      </div>
+
+    </div>
+    </div>
+  </div>
+</form>
+
+</div>

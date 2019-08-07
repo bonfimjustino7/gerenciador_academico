@@ -1,0 +1,73 @@
+      {% load static %}
+    {% if user.is_superuser or user.is_staff %}
+        <div class="conteudo mt-4 ml-4 mr-4">
+            <h5 class="card-title mb-4">Resultados de todos os alunos</h5>
+            <div class="row">
+                <div class="col-3">
+                    <a href="/alunos/aprovados">
+                    <div class="card py-3">
+                        <div class="media ml-2">
+                            <img class="mt-0" src="{% static 'img/aprovado.png'%}">
+                            <div class="media-body ml-3 py-1">
+                                <span>Alunos Aprovados:</span>
+                                <span class="d-block">{{alunosAp.count}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="col-3">
+                    <a href="/alunos/reprovados">
+                    <div class="card py-3">
+                        <div class="media ml-2">
+                            <img class="mt-0" src="{% static 'img/reprovado.png'%}">
+                            <div class="media-body ml-3 py-1">
+                                <span>Alunos Reprovados:</span>
+                                <span class="d-block">{{alunosRep.count}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="col-3">
+                    <a href="/alunos/recuperacao">
+                    <div class="card py-3">
+                        <div class="media ml-2">
+                            <img class="mt-0" src="{% static 'img/professor.png'%}">
+                            <div class="media-body ml-2 py-1">
+                                <span>Alunos Recuperação:</span>
+                                <span class="d-block">{{alunosRec.count}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="col-3">
+                    <a href="/alunos/todos">
+                    <div class="card py-3">
+                        <div class="media ml-2">
+                            <img class="mt-0" src="{% static 'img/alunos.png' %}">
+                            <div class="media-body ml-3 py-1">
+                                <span>Total de Alunos:</span>
+                                <span class="d-block">{{alunos.count}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+              <div class="card mt-4">
+                <div class="card-header">
+                  <h5 class="card-title">
+                    Situação dos alunos por diciplina
+                  </h5>
+                  
+                </div>
+                <div class="card-body card-grafico">
+                    <canvas id="alunosChart" width="30" height="15"></canvas>
+                </div>
+              </div>
+        </div>
+    {% else %}
+        <h3 class="text-muted text-center mt-4">Você não tem permissão para visualizar o conteúdo dessa página.</h3>
+    {% endif %}

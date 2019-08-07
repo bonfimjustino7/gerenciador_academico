@@ -1,0 +1,43 @@
+{% extends "layout/base.html" %}
+{% block title %}Login{% endblock %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/login-style.css' %}">{% endblock %}
+
+{% block conteudo %}
+<div class="container">
+	{% if messages %}
+				    {% for message in messages %}
+				    	{% if message.tags %}<div class="alert alert-{% if message.tags == 'error' %}danger{%endif%} alert-dismissible fade show mt-3" role="alert">{{message}}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>{% endif %}
+				    {% endfor %}
+	{% endif %}
+	<div class="card">
+		<div class="card-header">
+			<h5 class="card-title text-center px-2">Login Boxes Administrator</h5>
+		</div>
+		<div class="card-body">
+			<form action="login" method="POST">{% csrf_token %}
+			  <div class="form-group">
+			    <label for="exampleInputEmail1">Usuário</label>
+			    <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entre com o Usuário">
+			    <small id="emailHelp" class="form-text text-muted">Nunca compartilhe seu usuário e senha com ninguém.</small>
+			  </div>
+			  <div class="form-group">
+			    <label for="exampleInputPassword1">Senha</label>
+			    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Senha">
+			  </div>
+			  <div class="form-group">
+			  	<a href="" class="text-link">Esqueceu sua senha?</a>
+			  </div>
+			  {% if request.GET.next %}
+			  	<input type="hidden" name="next" value="{{request.GET.next}}">
+			  {%endif%}
+			  <div class="botoes">
+			  	<button type="submit" class="btn btn-primary btn-login" id="entrar">Entrar</button>
+			  	<button type="cancel" class="btn btn-danger btn-login" id="cancelar">Cancelar</button>
+			  </div>
+			</form>
+		</div>	
+	</div>
+</div>
+
+{% endblock %}

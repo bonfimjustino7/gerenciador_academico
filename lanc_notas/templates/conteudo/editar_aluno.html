@@ -1,0 +1,26 @@
+<div class="conteudo mt-4 ml-4 mr-4">
+<form action="" method="POST">
+  {% csrf_token %}
+  <div class="card p-4">
+  <div class="form-group row">
+    <label for="{{ form.nome.id_for_label }}" class="col-sm-2 col-form-label">Nome</label>
+    <div class="col-sm-10">
+      {{ form.nome }}
+    </div>
+    <label for="{{ form.semestre.id_for_label }}" class="col-sm-2 col-form-label">Semestre</label>
+    <div class="col-sm-10">
+      {{ form.semestre }}
+    </div>
+    <label for="{{ form.data_nac.id_for_label }}" class="col-sm-2 col-form-label">Data de Nacimento</label>
+    <div class="col-sm-10">
+      {{ form.data_nac }}
+    </div>
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-primary btn-sm">Atualizar</button>
+    </div>
+
+  </div>
+  </div>
+</form>
+
+</div>

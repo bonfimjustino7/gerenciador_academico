@@ -1,0 +1,16 @@
+{% extends "layout/base.html" %}
+{% block title %}Usuários | Configurações{% endblock %}
+{% block conteudo %}
+{% load static %}
+
+  <div class="wrapper">
+    <div class="d-flex" id="wrapper">
+     {% include "sidebar.html" %}
+     <div class="container-fluid">
+      {% include 'navbar.html' %}
+      {% include 'conteudo/config_user_page.html' %}
+     </div>
+  </div>
+ </div>
+
+{% endblock %}

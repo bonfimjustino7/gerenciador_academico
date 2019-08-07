@@ -1,0 +1,17 @@
+{% extends "layout/base.html" %}
+{% block title %}Dashboard | Todos os Alunos{% endblock %}
+{% block conteudo %}
+{% load static %}
+
+  <div class="wrapper">
+    <div class="d-flex" id="wrapper">
+     {% include "sidebar.html" %}
+     <div class="container-fluid">
+      {% include 'navbar.html' %}
+      {% include 'conteudo/tabela_alunos.html' %}
+      <a href="/alunos/novo"><img class="rounded-circle mr-2 btn-add mr-4" src="https://images-na.ssl-images-amazon.com/images/I/412rXWdCJ7L.png" alt="Adicionar Aluno" width="40"></img></a>
+     </div>
+  </div>
+ </div>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.card{
+	width: 500px;
+	position:absolute;
+	top:15%;
+	left:30%;
+}
+.card-header{
+	background-color: #354052;
+	color: #ced4da;
+	height: 60px;
+}
+h5{
+	margin-top: 5px;
+}
+.btn-login{
+	background-color: #354052 !important;
+	border-color: #354052 !important; 
+	color: #ced4da;
+}
+.botoes{
+	margin-left: 0%;
+}
+#entrar{
+	margin-right: 3%;
+}
+.text-link{
+	color: #777;
+}
+
+
+@media (max-width: 997px){
+	.card{
+		position: absolute;
+		top: 0;
+		left: 0;
+		margin: 0 auto;
+	}
+}

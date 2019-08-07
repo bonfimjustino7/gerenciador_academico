@@ -1,0 +1,19 @@
+{% extends "layout/base.html" %}
+{% block title %}Dashboard | Adicionar Pontuação{% endblock %}
+{% block conteudo %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/forms.css' %}">{% endblock %}
+
+
+  <div class="wrapper">
+    <div class="d-flex" id="wrapper">
+     {% include "sidebar.html" %}
+     <div class="container-fluid">
+      {% include 'navbar.html' %}
+      {% include 'conteudo/pontuar_aluno.html' %}
+      
+     </div>
+  </div>
+ </div>
+
+{% endblock %}

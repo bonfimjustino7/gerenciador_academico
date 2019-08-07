@@ -1,0 +1,62 @@
+{% extends "layout/base.html" %}
+{% block title %}Diciplina | {{diciplina}} {% endblock %}
+{% block conteudo %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/forms.css' %}">{% endblock %}
+
+
+<div class="wrapper">
+    <div class="d-flex" id="wrapper">
+     {% include "sidebar.html" %}
+     <div class="container-fluid">
+      {% include 'navbar.html' %}
+      <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+              {% if message.tags %}<div class="alert alert-{% if message.tags == 'error' %}danger{%else%}{{message.tags}}{%endif%} alert-dismissible fade show mt-3" role="alert">{{message}}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>{% endif %}
+            {% endfor %}
+ 	 	{% endif %}
+          <form method="POST">
+                {% csrf_token %}
+          <div class="card mt-4 border">
+              <div class="card-header">
+                  <div class="row">
+                      <div class="col-md-10 col-sm-10">
+                            <h4 class="card-title">{{diciplina}}</h4>
+                      </div>
+                      <div class="col-md col-sm">
+                            {% if diciplina.semestre_aberto %}
+                                <strong class="text-right text-success">Em aberta</strong>
+                            {% else %}
+                                <strong class="text-right text-danger">Fechada</strong>
+                            {% endif %}
+                      </div>
+                  </div>
+              </div>
+              <div class="card-body">
+                  <h5>Ementa:</h5>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, blanditiis
+                      dolores ea eius et eveniet, laboriosam laborum maxime odit officia officiis,
+                      quae qui quia saepe sed sit vero voluptas voluptate!</p>
+              </div>
+              <div class="card-footer">
+                <div class="row">                
+                    <div class="col-md-10">
+                    {% if not diciplina.semestre_aberto %}
+                        <input type="submit" name="botao" class="btn btn-success btn-sm" value="Abrir">
+                    {% else %}
+                        <input type="submit" name="botao" class="btn btn-danger btn-sm" value="Fechar">
+                    {% endif %}                       
+                    <a href="alunos"><input type="button" class="btn btn-primary btn-sm" value="Mostrar Alunos"></a>                  
+                </div>
+                    <a class="btn btn-dark btn-sm" href="remover">Abandonar Diciplina</a>                  
+                </div>
+              </div>
+            </form>               
+          </div>
+      </div>
+     </div>
+  </div>
+</div>
+
+{% endblock %}

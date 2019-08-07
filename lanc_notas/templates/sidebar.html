@@ -1,0 +1,64 @@
+        {% load static %}
+        {% load mytage %}
+        <div class="sidebar" id="sidebar-wrapper">
+            <!--<a href="" class="menu-toggle botao"><i class="icon ion-md-close"></i></a> -->
+            <div class="sidebar-heading mt-3"><i class="icon ion-ios-cube"></i>Boxes Administrator 
+                <p class="rotulo text-center mb-0">Gerenciador Acadêmico</p>
+                {% if user.is_superuser %}
+                    <p class="rotulo text-center text-danger mb-0">Super User</p>
+                {% elif user.professor %}
+                    <p class="rotulo text-center text-warning mb-0">Professor</p>
+                {% elif user.aluno %}
+                    <p class="rotulo text-center text-success mb-0">Aluno</p>
+                {% endif %}
+            </div>
+
+            <span class="sidebar-heading rotulo">Principal</span>
+            <div class="list-group list-group-flush mt-2" id="accordion">
+                {% if user|can_edit:'lanc_notas.view_professor' or user.is_superuser %}
+                <a href="/dashboard" class="list-group-item sidebar-item {% if pagina == '/dashboard' %}active{% endif %}"><i class="icon ion-ios-analytics"></i><span>Dashboard</span></a>
+              
+                <a class="list-group-item dropdown-toggle sidebar-item {% if pagina == '/alunos/' %}active{% endif %}" data-toggle="collapse" href="" data-target="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">
+                    <i class="icon ion-ios-people"></i>Alunos <i class="icon ion-md-arrow"></i>
+                </a>
+                
+                <div class="collapse" id="collapseExample">
+                    <a href="/alunos/novo" class="list-group-item subitem {% if pagina == '/clientes/ativo' %}active{% endif %}">Novo</a>    
+                    <a href="/alunos/aprovados" class="list-group-item subitem {% if pagina == '/clientes/excluidos' %}active{% endif %}">Aprovados</a>   
+                    <a href="/alunos/recuperacao" class="list-group-item subitem {% if pagina == '/clientes/novos' %}active{% endif %}">Em Recuperação</a>   
+                    <a href="/alunos/reprovados" class="list-group-item subitem {% if pagina == '/clientes/novos' %}active{% endif %}">Reprovados</a>
+                    <a href="/alunos/todos" class="list-group-item subitem {% if pagina == '/alunos/' %}active{% endif %}">Listar Todos</a>
+                </div>
+                {% endif %}
+                {% if user|can_edit:'lanc_notas.view_aluno' and user.aluno %}
+                <a class="list-group-item dropdown-toggle sidebar-item {% if pagina == '/alunos/' %}active{% endif %}" data-toggle="collapse" href="" data-target="#diciplinas-options" role="button" aria-expanded="true" aria-controls="diciplinas-options">
+                <i class="icon ion-md-bookmarks"></i>Diciplinas <i class="icon ion-md-arrow"></i>
+                </a>
+                
+                <div class="collapse" id="diciplinas-options">
+                    <a href="/minhasdiciplinas" class="list-group-item subitem"><i class="icon ion-ios-albums"></i>Minhas Diciplinas</a>  
+                    <!-- <a href="/alunos/pontuar" class="list-group-item subitem"><i class="icon ion-ios-list"></i>Pontuaçoes</a> -->
+                    <a href="/novamatricula" class="list-group-item subitem"><i class="icon ion-ios-bookmark"></i>Nova Matrícula</a> 
+
+                </div>
+                {% endif %}
+                {% if user|can_edit:'lanc_notas.view_professor' or user.is_superuser %}
+                <a class="list-group-item dropdown-toggle sidebar-item {% if pagina == '/alunos/' %}active{% endif %}" data-toggle="collapse" href="" data-target="#professores-options" role="button" aria-expanded="true" aria-controls="diciplinas-options">
+                <i class="icon ion-ios-school"></i>Professores <i class="icon ion-md-arrow"></i>
+                </a>
+                <div class="collapse" id="professores-options">
+                    <a href="/professores/inscrever" class="list-group-item subitem"><i class="icon ion-ios-person-add"></i>Inscrever</a>  
+                    <!-- <a href="/alunos/pontuar" class="list-group-item subitem"><i class="icon ion-ios-list"></i>Pontuaçoes</a> -->
+                    <a href="/minhasdiciplinas" class="list-group-item subitem"><i class="icon ion-ios-albums"></i>Minhas Diciplinas</a>
+                    <!-- <a href="/alunos/novo" class="list-group-item subitem"><i class="icon ion-ios-bookmark"></i>Nova Diciplina</a>  -->
+                </div>
+                {% endif %}
+                <span class="sidebar-heading rotulo">Sistema</span>
+                {% if user.is_superuser %}<a href="/usuarios" class="list-group-item sidebar-item">Usuários</a>{%endif%}
+                <a href="/usuarios/redefinirsenha/{{request.user.username}}" class="list-group-item sidebar-item">Alterar Senha</a>
+                <a href="/logout" class="list-group-item sidebar-item">Sair</a>
+              </div>
+
+              <div class="footer rotulo-direitos">AppSoft &copy 2019 | Todos os direitos reservados.</div>
+          </div>
+      </div>

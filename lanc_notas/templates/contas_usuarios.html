@@ -1,0 +1,113 @@
+{% extends "layout/base.html" %}
+{% block title %}Usuário | {{usuario}}{% endblock %}
+{% block conteudo %}
+{% load static %}
+
+  <div class="wrapper">
+    <div class="d-flex" id="wrapper">
+     {% include "sidebar.html" %}
+     <div class="container-fluid">
+      {% include 'navbar.html' %}
+      <!-- pagina de configuração de usuario -->
+<div class="container">
+	<form method="POST">
+		{% csrf_token %}
+		<div class="row">
+			<div class="col-md-9 col-sm-9">
+				{% if messages %}
+				    {% for message in messages %}
+				    	{% if message.tags %}<div class="alert alert-{{message.tags}} alert-dismissible fade show mt-3" role="alert">{{message}}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>{% endif %}
+				    {% endfor %}
+				{% endif %}
+
+				<div class="card mt-4">
+					<div class="card-header">
+						<strong>Olá {{usuario.username}}, seja bem-vindo</strong><br>
+						<p class="rotulo text-secondary mb-0">Aqui são suas informações no gerenciador acadêmico Boxes Administrator.</p>					
+						<i class="rotulo text-secondary">Observações:</i>
+						<p class="rotulo text-dark">Se desejar alterar alguma informação, basta clicar em alterar informações.</p>
+					</div>
+				</div>
+				<h5 class="card-title mt-4">Dados Pessoais</h5>
+				<div class="card mt-2">
+					<div class="card-body">				
+						<div class="input-group mb-3">				
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">Email</span>
+						  	</div>
+						  	<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"  name="email" value="{{usuario.email}}">
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+						    	<span class="input-group-text" id="basic-addon3">Usuário</span>
+							</div>
+						  	<input type="text" class="form-control" id="basic-url" name="usuario" aria-describedby="basic-addon3" value="{{usuario}}" required="">
+						</div>
+						
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">Primeiro e Último nome</span>
+							</div>
+								<input type="text" aria-label="First name" class="form-control" value="{{usuario.first_name}}" name="primeiro">
+							 	<input type="text" aria-label="Last name" class="form-control" value="{{usuario.last_name}}"  name="ultimo">
+							</div>
+
+						<!-- <div class="input-group mb-3">
+						 	<div class="input-group-prepend">
+						    	<span class="input-group-text">Está como usuário ativo?</span>
+						  	</div>
+						  	<input type="text" class="form-control" aria-label="Está como usuário ativo?" 
+						  	value="{% if user.is_active %}Sim{% else %}Não{% endif %}" disabled="" />
+						</div> -->
+						<div class="input-group mb-3">
+						 	<div class="input-group-prepend">
+						    	<span class="input-group-text">Tipo de Conta</span>
+						  	</div>
+						  	<input type="text" class="form-control" aria-label="Tem permissão Super Usuário?" 
+						  	value="{% if usuario.is_superuser %}Super Usuário{% elif usuario.is_staff %}Membro da Equipe{% elif usuario.is_active %}Ativo{% endif %}" disabled="" />
+						</div>			
+					</div>
+				</div>	
+				<h5 class="card-title mt-4">Grupos</h5>
+				<div class="card mt-2 mb-3">
+					<div class="card-body ">	
+						{% if usuario.groups.all %}			
+							{% for grupo in usuario.groups.all %}				
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">@</span>
+							  	</div>
+							  	<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" disabled="" id="email" value="{{grupo}}">
+							</div>
+							{% endfor %}
+						{% else %}
+							<h5 class="text-muted">Não possui grupos.</h5>	
+						{% endif %}				
+					</div>								
+				</div>	
+				<div class="card-footer mb-3">
+					<button type="submit" class="btn btn-primary btn-sm">Alterar</button>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-3">
+				<div class="card p-3 mt-4">
+					<ul>
+						<li>lorem impsum</li>
+						<li>lorem impsum</li>
+						<li>lorem impsum</li>
+						<li>lorem impsum</li>
+						<li>lorem impsum</li>
+						<li>lorem impsum</li>
+						<li>lorem impsum</li>
+					</ul>
+				</div>
+			</div>
+		</div>	
+	</form>
+</div>
+
+     </div>
+  </div>
+ </div>
+
+{% endblock %}

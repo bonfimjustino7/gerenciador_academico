@@ -1,0 +1,38 @@
+<div class="conteudo mt-4 ml-4 mr-4">
+	{% if usere %}
+	<h4 class="card-title">Usuários:</h4>
+		<strong class="text-muted">Resultado: {{usere.count}} usuarios</strong>
+	<div class="mt-4">
+		
+		<table class="table">
+			<thead>
+			    <tr>
+			      <th scope="col">Usuário</th>
+			      <th scope="col">Email</th>
+			      <th scope="col">Primeiro Nome</th>
+			      <th scope="col">Último Nome</th>
+			      <th scope="col">Membro da Equipe</th>
+			      <!-- <th id="thacao" scope="col">Ação</th> -->
+			    </tr>
+			</thead>
+			<tbody>
+				{% for usuario in usere %}
+				<tr>
+			     	<th scope="row"> <a href="usuarios/{{usuario.username}}">{{usuario.username}}</a></th>
+			    	<td>{{usuario.email}}</td>
+			    	<td>{{usuario.first_name}}</td>
+			    	<td>{{usuario.last_name}}</td>
+			    	<td>{% if usuario.is_staff %}Sim{% else %}Não{% endif %}</td>
+			    	<!-- <td class="acoes">
+			    		<a class="btn btn-sm btn-warning" href="editar/{{aluno.aluno.matricula}}">Editar</a>
+			    		<a class="btn btn-sm btn-dark" href="excluir/{{aluno.aluno.matricula}}">Excluir</a>
+			    	</td> -->			    
+			    </tr>
+			    {% endfor %}
+			</tbody>
+		</table>
+	</div>
+	{% else %}
+		<h3 class="text-muted text-center">Não existe alunos nessa categoria.</h3>
+	{% endif %}
+</div>

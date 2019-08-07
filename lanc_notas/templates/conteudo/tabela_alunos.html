@@ -1,0 +1,31 @@
+<div class="conteudo mt-4 ml-4 mr-4">
+	{% if alunos %}
+		<h4 class="card-title">Alunos Matriculados:</h4>
+			<strong class="text-muted">Total: {{alunos.count}} alunos matriculados.</strong>
+			<table class="table table-sm p-4 mt-3">
+				<thead class="thead-light">
+				    <tr>
+				      <th scope="col">Matricula</th> 
+				      <th scope="col">Nome</th>
+				      <th scope="col">Semestre</th>
+				      <th scope="col">Data de Nascimento</th>
+				      <th id="thacao" scope="col">Ação</th>
+				    </tr>
+				</thead>
+				<tbody>
+					{% for aluno in alunos %}
+					<tr>
+				     	<th scope="row"> {{aluno.matricula}}</th> 
+				    	<td>{{aluno.nome}}</td>
+				    	<td>{{aluno.semestre}}</td>
+				    	<td>{{aluno.data_nac}}</td>
+				    	<td class="acoes">
+				    		<a class="btn btn-sm btn-warning" href="editar/{{aluno.matricula}}">Editar</a>
+				    		<a class="btn btn-sm btn-dark" href="excluir/{{aluno.matricula}}">Excluir</a>
+				    	</td>
+				    </tr>
+				    {% endfor %}
+				</tbody>
+			</table>
+	{% endif %}
+</div>

@@ -1,0 +1,62 @@
+{% extends "layout/base.html" %}
+{% block title %}Diciplina | Todos os Alunos{% endblock %}
+{% block conteudo %}
+{% load static %}
+{% load mytage %}
+  <div class="wrapper">
+    <div class="d-flex" id="wrapper">
+     {% include "sidebar.html" %}
+     <div class="container-fluid">
+      {% include 'navbar.html' %}
+      <div class="conteudo mt-4 ml-4 mr-4">
+      	{% if messages %}
+            {% for message in messages %}
+              {% if message.tags %}<div class="alert alert-{% if message.tags == 'error' %}danger{%else%}{{message.tags}}{%endif%} alert-dismissible fade show mt-3" role="alert">{{message}}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>{% endif %}
+            {% endfor %}
+ 	 	{% endif %}
+			<h4 class="card-title">Alunos de {{dici_get}}</h4>
+				<strong class="text-muted">Resultado: {{diciplina.count}} alunos </strong>
+			<div class="mt-4">
+				
+				<table class="table">
+					<thead>
+					    <tr>
+					      <th scope="col">Matricula</th>
+					      <th scope="col">Nome</th>
+					      <th scope="col">Semestre</th>
+					      <th scope="col">1ª Nota</th>
+						  <th scope="col">2ª Nota</th>
+						  <th scope="col">3ª Nota</th>
+						  <th scope="col">MF</th>
+						  <th scope="col">Faltas</th> 
+					      <th scope="col">Situação</th> 
+					    </tr>
+					</thead>
+					<tbody>
+						{% for aluno in diciplina %}
+						<tr>
+					     	<th scope="row"> {{aluno.aluno.matricula}}</th>
+					    	<td><a href="{% if user|can_edit:'lanc_notas.change_aluno_diciplina' %}{{aluno.id}}{%else%}#{%endif%}">{{aluno.aluno.nome}}</a></td>
+					    	<td>{{aluno.aluno.semestre}}</td>
+					    	<td>{{aluno.n1}}</td>
+							<td>{{aluno.n2}}</td>
+							<td>{{aluno.n3}}</td>
+							<td>{{aluno.media}}</td>
+							<td>{{aluno.faltas}}</td>
+					    	<td>{{aluno.situacao}}</td>
+					    	<!-- <td class="acoes">
+					    		<a class="btn btn-sm btn-warning" href="editar/{{aluno.aluno.matricula}}">Editar</a>
+					    		<a class="btn btn-sm btn-dark" href="excluir/{{aluno.aluno.matricula}}">Excluir</a>
+					    	</td> -->
+					    </tr>
+					    {% endfor %}
+					</tbody>
+				</table>
+			</div>
+			
+		</div>      	 
+     </div>
+  </div>
+ </div>
+
+{% endblock %}

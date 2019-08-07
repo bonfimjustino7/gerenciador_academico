@@ -1,0 +1,86 @@
+<!-- pagina de configuração de usuario -->
+<div class="container">
+	<div class="row">
+		<div class="col-md-9 col-sm-9">
+			<div class="card mt-4">
+				<div class="card-header">
+					<strong>Olá {{user.username}}, seja bem-vindo</strong><br>
+					<p class="rotulo text-secondary mb-0">Aqui são suas informações no gerenciador acadêmico Boxes Administrator.</p>					
+					<i class="rotulo text-secondary">Observações:</i>
+					<p class="rotulo text-dark">Se desejar alterar alguma informação, basta clicar em alterar informações.</p>
+				</div>
+			</div>
+			<h5 class="card-title mt-4">Dados Pessoais</h5>
+			<div class="card mt-2">
+				<div class="card-body">				
+					<div class="input-group mb-3">				
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">Email</span>
+					  	</div>
+					  	<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" disabled="" id="email" value="{{user.email}}">
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+					    	<span class="input-group-text" id="basic-addon3">Usuário</span>
+						</div>
+					  	<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="{{user}}" disabled="">
+					</div>
+					
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Primeiro e Último nome</span>
+						</div>
+							<input type="text" aria-label="First name" class="form-control" value="{{user.first_name}}" disabled="">
+						 	<input type="text" aria-label="Last name" class="form-control" value="{{user.last_name}}" disabled="">
+						</div>
+
+					<!-- <div class="input-group mb-3">
+					 	<div class="input-group-prepend">
+					    	<span class="input-group-text">Está como usuário ativo?</span>
+					  	</div>
+					  	<input type="text" class="form-control" aria-label="Está como usuário ativo?" 
+					  	value="{% if user.is_active %}Sim{% else %}Não{% endif %}" disabled="" />
+					</div> -->
+					<div class="input-group mb-3">
+					 	<div class="input-group-prepend">
+					    	<span class="input-group-text">Tipo de Conta</span>
+					  	</div>
+					  	<input type="text" class="form-control" aria-label="Tem permissão Super Usuário?" 
+					  	value="{% if user.is_superuser %}Super Usuário{% elif user.is_staff %}Membro da Equipe{% elif user.is_active %}Ativo{% endif %}" disabled="" />
+					</div>			
+				</div>
+			</div>	
+			<h5 class="card-title mt-4">Grupos</h5>
+			<div class="card mt-2 mb-3">
+				<div class="card-body ">	
+					{% if user.groups.all %}			
+						{% for grupo in user.groups.all %}				
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="basic-addon1">@</span>
+						  	</div>
+						  	<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" disabled="" id="email" value="{{grupo}}">
+						</div>
+						{% endfor %}
+					{% else %}
+						<h5 class="text-muted">Não possui grupos.</h5>	
+					{% endif %}				
+				</div>								
+			</div>	
+		</div>
+		<div class="col-md-3 col-sm-3">
+			<div class="card p-3 mt-4">
+				<ul>
+					<li>lorem impsum</li>
+					<li>lorem impsum</li>
+					<li>lorem impsum</li>
+					<li>lorem impsum</li>
+					<li>lorem impsum</li>
+					<li>lorem impsum</li>
+					<li>lorem impsum</li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+</div>

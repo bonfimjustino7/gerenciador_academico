@@ -1,0 +1,37 @@
+<script>
+var ctx = document.getElementById("alunosChart");
+var rotulos = JSON.parse('{{ names|safe }}');
+var valores = JSON.parse('{{ prices|safe }}');
+var options = {
+        responsive:true
+    };
+var productsChart = new Chart(ctx, {
+    type: 'line',
+
+    data: {
+        labels: rotulos,
+        datasets: [{
+            label: 'Aprovados',
+            data: valores,
+            backgroundColor:'rgba(54, 162, 235, 0.2)',
+            borderColor: '#47bac1',
+            borderWidth: 3,
+            fill: false
+        }],
+    },
+
+    options: {
+        responsive: true,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    max: 20,
+                    min: 0,
+                    
+                }
+            }]
+        }
+    }
+});
+
+</script>

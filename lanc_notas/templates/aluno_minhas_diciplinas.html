@@ -1,0 +1,40 @@
+{% extends "layout/base.html" %}
+{% block title %}Minhas Diciplinas{% endblock %}
+{% block conteudo %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/forms.css' %}">{% endblock %}
+
+
+  <div class="wrapper">
+    <div class="d-flex" id="wrapper">
+     {% include "sidebar.html" %}
+     <div class="container-fluid">
+     	{% include 'navbar.html' %}
+      	<div class="container">
+      		<div class="card mt-5">
+      			<div class="card-header">
+      				<h5 class="card-title">Minha Diciplinas</h5>
+      				<h6 class="card-subtitle text-muted pl-2">{{aluno.count}} Diciplinas</h6>
+      			</div>
+      			<div class="card-body">
+      				<div class="row">
+		      			{% for d in aluno %}
+		      			<div class="col-md-3 col-lg-3 col-sm-3">
+		      				<div class="card mb-2">
+		      					<div class="card-body bg-info">
+		      						<a href="minhasdiciplinas/{{d.id}}"><h5 class="card-title text-center text-white">{{d.diciplina}}</h5></a>
+		      					</div>
+		      				</div>
+		      			</div>		      			
+		      			{% empty %}
+		      				<h5 class="text-center text-muted">Você não está matriculado em nenhuma diciplina.</h5>
+		      			{%endfor%}
+      				</div>
+      			</div>
+      		</div>
+      	</div>
+     </div>
+  </div>
+ </div>
+
+{% endblock %}

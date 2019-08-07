@@ -1,0 +1,15 @@
+<div class="conteudo mt-4 ml-4 mr-4">
+	<div class="card p-4">
+	<h4 class="card-title">Tem certeza?</h4>
+	<p>Tem certeza de que deseja apagar o aluno selecionado? Todos os seguintes objetos e seus itens relacionados serão removidos:</p>
+	<ul><h4>Resumo:</h4>
+		<li><strong>Nome:</strong> {{aluno.nome}}</li>
+		<li><strong>Semestre:</strong> {{aluno.semestre}}</li>
+	</ul>
+	<form action="" method="POST">
+		{% csrf_token %}
+		<button type="submit" class="btn btn-danger">Sim, excluir aluno</button>
+		<a href="/alunos/todos"><input type="button" role="button"class="btn btn-secundary" value="Não, me leve de volta"></a>
+	</form>
+	</div>
+</div>

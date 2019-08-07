@@ -1,0 +1,38 @@
+<div class="conteudo mt-4 ml-4 mr-4">
+	{% if alunos %}
+	<h4 class="card-title">Alunos {{status}}:</h4>
+		<strong class="text-muted">Resultado: {{alunos.count}} alunos {{status}}</strong>
+	<div class="mt-4">
+		
+		<table class="table">
+			<thead>
+			    <tr>
+			      <th scope="col">Matricula</th>
+			      <th scope="col">Nome</th>
+			      <th scope="col">Semestre</th>
+			      <th scope="col">Diciplina</th>
+			      <th scope="col">Média</th>
+			      <!-- <th id="thacao" scope="col">Ação</th> -->
+			    </tr>
+			</thead>
+			<tbody>
+				{% for aluno in alunos %}
+				<tr>
+			     	<th scope="row"> {{aluno.aluno.matricula}}</th>
+			    	<td>{{aluno.aluno}}</td>
+			    	<td>{{aluno.aluno.semestre}}</td>
+			    	<td>{{aluno.diciplina}}</td>
+			    	<td>{{aluno.media}}</td>
+			    	<!-- <td class="acoes">
+			    		<a class="btn btn-sm btn-warning" href="editar/{{aluno.aluno.matricula}}">Editar</a>
+			    		<a class="btn btn-sm btn-dark" href="excluir/{{aluno.aluno.matricula}}">Excluir</a>
+			    	</td> -->
+			    </tr>
+			    {% endfor %}
+			</tbody>
+		</table>
+	</div>
+	{% else %}
+		<h3 class="text-muted text-center">Não existe alunos nessa categoria.</h3>
+	{% endif %}
+</div>
